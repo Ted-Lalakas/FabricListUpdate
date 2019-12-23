@@ -4,8 +4,13 @@ import { IFabricListUpdateProps } from './IFabricListUpdateProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
 import GetListStart from './getListStart/getListStart';
+import ShowList from './ShowList/ShowList';
 
-export default class FabricListUpdate extends React.Component<IFabricListUpdateProps, any, any> {
+interface IFabricListUpdateState {
+  listString: string
+}
+
+export default class FabricListUpdate extends React.Component<IFabricListUpdateProps, IFabricListUpdateState, {}> {
   constructor(props) {
     super(props);
 
@@ -15,7 +20,7 @@ export default class FabricListUpdate extends React.Component<IFabricListUpdateP
   }
 
   getListString = (newValue:string) => {
-    console.log("Link: ",newValue);
+    this.setState({ listString: newValue });
   }
 
   public render(): React.ReactElement<IFabricListUpdateProps> {
@@ -24,7 +29,11 @@ export default class FabricListUpdate extends React.Component<IFabricListUpdateP
         <div className={ styles.container }>
           <div className={ styles.row }>
             <div className={ styles.column }>
-              <GetListStart getListString={this.getListString} />
+              { 
+              this.state.listString == "" 
+              ? <GetListStart getListString={this.getListString} />
+              : <ShowList listString={this.state.listString} />
+              } 
             </div>
           </div>
         </div>

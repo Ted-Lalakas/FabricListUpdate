@@ -13,6 +13,7 @@ import { IFabricListUpdateProps } from './components/IFabricListUpdateProps';
 
 export interface IFabricListUpdateWebPartProps {
   description: string;
+  context: any;
 }
 
 export default class FabricListUpdateWebPart extends BaseClientSideWebPart<IFabricListUpdateWebPartProps> {
@@ -21,7 +22,8 @@ export default class FabricListUpdateWebPart extends BaseClientSideWebPart<IFabr
     const element: React.ReactElement<IFabricListUpdateProps > = React.createElement(
       FabricListUpdate,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        context: this.context
       }
     );
 
